@@ -39,8 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Local
+    "account.apps.AccountConfig",
     "pages.apps.PagesConfig",
 ]
+
+AUTH_USER_MODEL = "account.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
