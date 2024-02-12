@@ -5,6 +5,10 @@ db.sqlite3
 
 # Local files
 .env
+node_modules/
+staticfiles/
+static/js/
+static/css/
 
 # Local DB
 db_data/
