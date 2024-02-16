@@ -5,3 +5,4 @@ psycopg[binary]>=3.1.18,<3.2
 django-compressor>=4.4,<4.5
 django-crispy-forms>=2.1,<2.2
 crispy-tailwind>=1.0.1,<1.1
+django-allauth>=0.61.0,<0.62
