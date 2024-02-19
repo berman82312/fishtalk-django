@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd party libraries
     # "compressor",
     "crispy_forms",
@@ -49,11 +50,11 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     # Local
-    "account.apps.AccountConfig",
+    "accounts.apps.AccountConfig",
     "pages.apps.PagesConfig",
 ]
 
-AUTH_USER_MODEL = "fishtalk_account.User"
+AUTH_USER_MODEL = "accounts.User"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -164,6 +165,8 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 
 # django-allauth
+SITE_ID = 1
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
@@ -171,7 +174,16 @@ AUTHENTICATION_BACKENDS = [
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = (
+    "django.core.mail.backends.smtp.EmailBackend"
+    if env("DJANGO_EMAIL_HOST")
+    else "django.core.mail.backends.console.EmailBackend"
+)
+EMAIL_HOST = env("DJANGO_EMAIL_HOST")
+EMAIL_PORT = env.int("DJANGO_EMAIL_PORT")
+EMAIL_HOST_USER = env("DJANGO_EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("DJANGO_EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = env.bool("DJANGO_EMAIL_USE_TLS")
 
 ACCOUNT_SESSION_REMEMBER = True
 
@@ -180,3 +192,5 @@ ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_REQUIRED = True
 
 ACCOUNT_UNIQUE_EMAIL = True
+
+DEFAULT_FROM_EMAIL = "no-reply@fishtalk.me"
