@@ -11,5 +11,7 @@ class ContentListView(ListView):
 
 class ContentDetailView(DetailView):
     model = Content
+    slug_field = "uuid"
+    slug_url_kwarg = "uuid"
     context_object_name= "content"
     template_name = "contents/content_detail.html"
