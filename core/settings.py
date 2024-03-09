@@ -50,11 +50,13 @@ INSTALLED_APPS = [
     "allauth",
     "allauth.account",
     # Local
-    "accounts.apps.AccountConfig",
+    "editorjs.apps.EditorConfig",
+    "accounts.apps.AccountsConfig",
     "pages.apps.PagesConfig",
+    "contents.apps.ContentsConfig",
 ]
 
-AUTH_USER_MODEL = "accounts.User"
+AUTH_USER_MODEL = "accounts.Account"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

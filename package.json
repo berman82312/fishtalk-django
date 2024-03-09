@@ -2,14 +2,20 @@
   "scripts": {
     "watch:tailwind": "tailwindcss -i ./src/css/input.css -o ./static/css/output.css --watch",
     "watch:typescript": "tsc -w",
-    "watch": "concurrently -n w: npm:watch:*"
+    "watch:bundle": "esbuild src/ts/base.ts src/ts/editor.ts --bundle --outdir=static/js --watch",
+    "dev": "concurrently -n w: npm:watch:*"
   },
   "devDependencies": {
+    "@types/editorjs__header": "^2.6.3",
     "concurrently": "^8.2.2",
+    "esbuild": "^0.20.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"
   },
   "dependencies": {
+    "@editorjs/editorjs": "^2.29.0",
+    "@editorjs/header": "^2.8.1",
+    "@editorjs/image": "^2.9.0",
     "flowbite": "^2.2.1"
   }
 }

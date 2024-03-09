@@ -1,0 +1,18 @@
+<div
+    id="editorjs"
+    class="custom-editor"
+    style="width: 100%; border: 1px solid #dadada; border-radius: 0.25rem;"
+    data-editor-name="{{ widget.name }}"
+    data-editor-target="{{ widget.name }}"
+></div>
+{% if widget.value %}
+{% with name="editorData_"|add:widget.name %}
+{{ widget.value|json_script:name }}
+{% endwith %}
+{% endif %}
+{% if widget.attrs.tools %}
+{% with name="editorTools_"|add:widget.name %}
+{{ widget.attrs.tools|json_script:name }}
+{% endwith %}
+{% endif %}
+<textarea name="{{ widget.name }}" hidden>{% if widget.value %}{{ widget.value }}{% endif %}</textarea>

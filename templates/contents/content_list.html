@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+
+{% block title %}Books{% endblock title %}
+
+{% block content %}
+    {% for content in content_list %}
+    <div>
+        <h2><a href="{{ content.get_absolute_url }}">{{ content.title }}</a></h2>
+    </div>
+    {% endfor %}
+{% endblock content %}
