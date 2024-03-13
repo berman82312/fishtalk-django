@@ -1,9 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.test import TestCase
 from django.urls import reverse
-from django.contrib.auth import get_user_model
 
 # Create your tests here.
-from .models import Content
+from .models import Content, Review
 
 User = get_user_model()
 
@@ -12,15 +12,20 @@ class ContentTests(TestCase):
 
     @classmethod
     def setUpTestData(cls) -> None:
-        user = User.objects.create_user(
+        cls.user = User.objects.create_user(
             username='test',
             email='test@example.com',
             password='test_password',
         )
         cls.content = Content.objects.create(
             title="Harry Potter",
-            creator=user,
+            creator=cls.user,
             price=25,
+        )
+        cls.review = Review.objects.create(
+            review = "A testing review",
+            creator = cls.user,
+            content = cls.content,
         )
 
     def test_content_listing(self):
@@ -40,4 +45,5 @@ class ContentTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(no_response.status_code, 404)
         self.assertContains(response, "Harry Potter")
+        self.assertContains(response, "A testing review")
         self.assertTemplateUsed(response, "contents/content_detail.html")
